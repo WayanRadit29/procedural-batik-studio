@@ -5,8 +5,8 @@ function drawParang(ctx, config = {}) {
         spacing = 0,
     
         colors = {
-            primary: "purple",
-            secondary: "orange"
+            primary: "#663399",
+            secondary: "#F28C28"
         }
     
     } = config;
@@ -95,22 +95,27 @@ function drawParang(ctx, config = {}) {
     
         ctx.fillStyle = colors.secondary;
     
+        const r = cell * 0.65;
+    
         ctx.beginPath();
     
-        ctx.moveTo(0, -cell / 2);
-    
-        ctx.quadraticCurveTo(
-            cell / 2,
+        ctx.moveTo(
             0,
-            0,
-            cell / 2
+            -r
         );
     
         ctx.quadraticCurveTo(
-            -cell / 2,
+            r,
             0,
             0,
-            -cell / 2
+            r
+        );
+    
+        ctx.quadraticCurveTo(
+            -r,
+            0,
+            0,
+            -r
         );
     
         ctx.fill();
@@ -275,7 +280,7 @@ function drawParang(ctx, config = {}) {
     }
 
     // ==========================================
-    // 4 TYPES OF CIRCLE QUARTER 
+    // QUARTER
     // ==========================================
 
     function drawQuarterTL(x, y){
@@ -407,11 +412,11 @@ function drawParang(ctx, config = {}) {
                 break;
 
             case 'F':
-                drawFlower4(x, y,45);
+                drawLeaf(x, y,-45);
                 break;
 
             case 'G':
-                drawCircle(x, y,-45);
+                drawLeaf(x, y,45);
                 break;
 
         }
