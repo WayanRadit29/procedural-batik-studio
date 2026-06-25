@@ -1,0 +1,215 @@
+/* ============================================================
+   style.css — Procedural Batik Design Studio
+   ============================================================ */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg-app:        #1a1410;
+  --bg-sidebar:    #231c16;
+  --bg-section:    #2e2318;
+  --bg-input:      #3a2d20;
+  --border:        #4a3828;
+  --accent:        #c07a3a;
+  --accent-hover:  #d98d48;
+  --text-primary:  #f0e0c8;
+  --text-secondary:#9e7f5e;
+  --text-label:    #c4a882;
+  --radius:        6px;
+  --sidebar-w:     280px;
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  background: var(--bg-app);
+  color: var(--text-primary);
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* ====== Layout ====== */
+.app-layout {
+  display: flex;
+  height: 100vh;
+}
+
+/* ====== Sidebar ====== */
+.sidebar {
+  width: var(--sidebar-w);
+  background: var(--bg-sidebar);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebar-header {
+  padding: 20px 16px 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.app-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.app-sub {
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+.control-section {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.section-title {
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-secondary);
+  margin-bottom: 2px;
+}
+
+/* ====== Param rows ====== */
+.param-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.param-row label {
+  font-size: 0.78rem;
+  color: var(--text-label);
+  min-width: 80px;
+  flex-shrink: 0;
+}
+
+.param-row input[type="range"] {
+  flex: 1;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+.param-row input[type="color"] {
+  width: 36px;
+  height: 26px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: none;
+  cursor: pointer;
+  padding: 2px;
+}
+
+.param-row select {
+  flex: 1;
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text-primary);
+  font-size: 0.8rem;
+  padding: 4px 6px;
+  cursor: pointer;
+}
+
+.param-val {
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  min-width: 24px;
+  text-align: right;
+}
+
+/* ====== Motif panels ====== */
+.motif-panel {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.motif-header {
+  padding: 8px 10px;
+  background: var(--bg-section);
+}
+
+.motif-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.motif-toggle input[type="checkbox"] {
+  accent-color: var(--accent);
+  width: 14px;
+  height: 14px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.motif-label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.motif-params {
+  padding: 10px;
+  background: var(--bg-input);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+#motifControls {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* ====== Export button ====== */
+.btn-export {
+  width: 100%;
+  padding: 10px;
+  background: var(--accent);
+  color: #1a1410;
+  font-size: 0.85rem;
+  font-weight: 700;
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  letter-spacing: 0.04em;
+  transition: background 0.15s;
+}
+
+.btn-export:hover {
+  background: var(--accent-hover);
+}
+
+/* ====== Preview area ====== */
+.preview-area {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-app);
+  overflow: hidden;
+}
+
+#batikCanvas {
+  max-width: 100%;
+  max-height: 100%;
+  box-shadow: 0 4px 32px rgba(0,0,0,0.6);
+  display: block;
+}

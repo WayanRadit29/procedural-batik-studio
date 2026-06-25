@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Procedural Batik Design Studio</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <div class="app-layout">
+
+    <!-- ====== SIDEBAR KONTROL ====== -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h1 class="app-title">Batik Studio</h1>
+        <p class="app-sub">Procedural Design</p>
+      </div>
+
+      <div class="control-section">
+        <h2 class="section-title">Kanvas</h2>
+        <div class="param-row">
+          <label for="bgColor">Warna Kain</label>
+          <input type="color" id="bgColor" value="#F5E6CA" />
+        </div>
+        <div class="param-row">
+          <label for="combinationMode">Mode Kombinasi</label>
+          <select id="combinationMode">
+            <option value="alternating">Alternating</option>
+            <option value="split">Split Region</option>
+            <option value="layering">Layering</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="control-section">
+        <h2 class="section-title">Pilih Motif</h2>
+        <!-- Panel motif diisi secara dinamis oleh ui.js -->
+        <div id="motifControls"></div>
+      </div>
+
+      <div class="control-section">
+        <button id="exportBtn" class="btn-export">⬇ Export PNG</button>
+      </div>
+    </aside>
+
+    <!-- ====== AREA PREVIEW ====== -->
+    <main class="preview-area">
+      <canvas id="batikCanvas" width="800" height="800"></canvas>
+    </main>
+
+  </div>
+
+  <!-- Motif engines dari anggota lain -->
+  <script src="js/motifs/kawung.js"></script>
+  <script src="js/motifs/parang.js"></script>
+  <script src="js/motifs/ceplok.js"></script>
+  <script src="js/motifs/megaMendung.js"></script>
+
+  <!-- Core app -->
+  <script src="js/export.js"></script>
+  <script src="js/renderer.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/main.js"></script>
+
+</body>
+</html>
