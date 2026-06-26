@@ -25,8 +25,9 @@ function buildConfig() {
   });
 
   return {
-    backgroundColor: document.getElementById("bgColor").value,
-    combinationMode: document.getElementById("combinationMode").value,
+    backgroundColor:  document.getElementById("bgColor").value,
+    combinationMode:  document.getElementById("combinationMode").value,
+    canvasShape:      document.getElementById("canvasShape").value,
     motifs,
   };
 }

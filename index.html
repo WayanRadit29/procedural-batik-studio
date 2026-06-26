@@ -20,6 +20,16 @@
       <div class="control-section">
         <h2 class="section-title">Kanvas</h2>
         <div class="param-row">
+          <label for="canvasShape">Bentuk Kanvas</label>
+          <select id="canvasShape">
+            <option value="polos">Polos</option>
+            <option value="kemeja">Kemeja</option>
+            <option value="rok">Rok</option>
+            <option value="gamis">Gamis</option>
+            <option value="sarung">Sarung</option>
+          </select>
+        </div>
+        <div class="param-row">
           <label for="bgColor">Warna Kain</label>
           <input type="color" id="bgColor" value="#F5E6CA" />
         </div>
@@ -58,6 +68,7 @@
   <script src="js/motifs/megaMendung.js"></script>
 
   <!-- Core app -->
+  <script src="js/garment.js"></script>
   <script src="js/export.js"></script>
   <script src="js/renderer.js"></script>
   <script src="js/ui.js"></script>

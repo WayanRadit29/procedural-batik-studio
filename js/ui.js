@@ -76,11 +76,13 @@ function buildMotifControls() {
 // ---------------------------------------------------------------------------
 
 function attachGlobalListeners(onUpdate) {
-  const bgColor = document.getElementById("bgColor");
+  const bgColor        = document.getElementById("bgColor");
   const combinationMode = document.getElementById("combinationMode");
+  const canvasShape    = document.getElementById("canvasShape");
 
-  if (bgColor) bgColor.addEventListener("input", onUpdate);
+  if (bgColor)        bgColor.addEventListener("input", onUpdate);
   if (combinationMode) combinationMode.addEventListener("change", onUpdate);
+  if (canvasShape)    canvasShape.addEventListener("change", onUpdate);
 }
 
 // ---------------------------------------------------------------------------
