@@ -5,10 +5,10 @@
  */
 
 const MOTIF_LIST = [
-  { id: "kawung",      label: "Kawung" },
-  { id: "parang",      label: "Parang" },
-  { id: "ceplok",      label: "Ceplok" },
-  { id: "megaMendung", label: "Mega Mendung" },
+  { id: "kawung",      label: "Kawung",       defaultSize: 80, defaultSpacing: 40 },
+  { id: "parang",      label: "Parang",       defaultSize: 50, defaultSpacing: 10 },
+  { id: "ceplok",      label: "Ceplok",       defaultSize: 50, defaultSpacing: 10 },
+  { id: "megaMendung", label: "Mega Mendung", defaultSize: 50, defaultSpacing: 10 },
 ];
 
 /**
@@ -33,7 +33,7 @@ function buildMotifControls() {
 
   container.innerHTML = "";
 
-  MOTIF_LIST.forEach(({ id, label }) => {
+  MOTIF_LIST.forEach(({ id, label, defaultSize, defaultSpacing }) => {
     const panel = document.createElement("div");
     panel.className = "motif-panel";
     panel.id = `panel-${id}`;
@@ -48,13 +48,13 @@ function buildMotifControls() {
       <div class="motif-params" id="params-${id}" style="display:none;">
         <div class="param-row">
           <label for="size-${id}">Ukuran</label>
-          <input type="range" id="size-${id}" min="20" max="120" value="50" />
-          <span class="param-val" id="size-${id}-val">50</span>
+          <input type="range" id="size-${id}" min="20" max="120" value="${defaultSize}" />
+          <span class="param-val" id="size-${id}-val">${defaultSize}</span>
         </div>
         <div class="param-row">
           <label for="spacing-${id}">Kepadatan</label>
-          <input type="range" id="spacing-${id}" min="0" max="60" value="10" />
-          <span class="param-val" id="spacing-${id}-val">10</span>
+          <input type="range" id="spacing-${id}" min="0" max="100" value="${defaultSpacing}" />
+          <span class="param-val" id="spacing-${id}-val">${defaultSpacing}</span>
         </div>
         <div class="param-row">
           <label for="primary-${id}">Warna Utama</label>

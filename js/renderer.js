@@ -51,8 +51,31 @@ function drawBackground(ctx, color) {
 }
 
 // ---------------------------------------------------------------------------
-// Mode 1: Alternating Pattern (WAJIB)
+// Buat virtual canvas sementara untuk satu motif, lalu tile ke canvas utama.
+// Ini menghindari masalah motif yang membaca ctx.canvas.width/height
+// secara absolut dan tidak mendukung offset.
+// ---------------------------------------------------------------------------
+
+function drawMotifToTile(motifCfg, tileSize) {
+  const offscreen = document.createElement("canvas");
+  offscreen.width = tileSize;
+  offscreen.height = tileSize;
+  const offCtx = offscreen.getContext("2d");
+
+  const drawFn = MOTIF_DRAW_FN[motifCfg.type];
+  if (!drawFn) {
+    console.warn(`Fungsi motif untuk "${motifCfg.type}" tidak ditemukan.`);
+    return null;
+  }
+
+  drawFn(offCtx, motifCfg);
+  return offscreen;
+}
+
+// ---------------------------------------------------------------------------
+// Mode 1: Alternating Pattern
 // Motif digambar bergantian per cell dalam grid.
+// Setiap motif di-render ke offscreen canvas dulu agar bisa di-tile dengan benar.
 // ---------------------------------------------------------------------------
 
 function renderAlternating(ctx, motifs) {
@@ -61,41 +84,26 @@ function renderAlternating(ctx, motifs) {
   const W = ctx.canvas.width;
   const H = ctx.canvas.height;
 
-  // Gunakan size + spacing motif pertama sebagai ukuran cell grid
-const cellSize = motifs[0].size + motifs[0].spacing;
+  const cellSize = Math.max(10, motifs[0].size + motifs[0].spacing);
+  const cols = Math.ceil(W / cellSize) + 1;
+  const rows = Math.ceil(H / cellSize) + 1;
 
-  const cols = Math.ceil(W / cellSize);
-  const rows = Math.ceil(H / cellSize);
+  // Pre-render setiap motif ke offscreen canvas
+  const tiles = motifs.map((motifCfg) => drawMotifToTile(motifCfg, cellSize));
 
   for (let row = 0; row < rows; row++) {
     for (let col = 0; col < cols; col++) {
       const idx = (row * cols + col) % motifs.length;
-      const motifCfg = motifs[idx];
-      const drawFn = MOTIF_DRAW_FN[motifCfg.type];
+      const tile = tiles[idx];
+      if (!tile) continue;
 
-      if (!drawFn) {
-        console.warn(`Fungsi motif untuk "${motifCfg.type}" tidak ditemukan.`);
-        continue;
-      }
-
-      // Clip ke area cell agar motif tidak meluber ke cell lain
-      ctx.save();
-      ctx.beginPath();
-      ctx.rect(col * cellSize, row * cellSize, cellSize, cellSize);
-      ctx.clip();
-
-      // Geser origin ke pojok kiri atas cell
-      ctx.translate(col * cellSize, row * cellSize);
-
-      drawFn(ctx, { ...motifCfg, offsetX: 0, offsetY: 0 });
-
-      ctx.restore();
+      ctx.drawImage(tile, col * cellSize, row * cellSize);
     }
   }
 }
 
 // ---------------------------------------------------------------------------
-// Mode 2: Split Region (BONUS)
+// Mode 2: Split Region
 // Canvas dibagi rata secara horizontal berdasarkan jumlah motif.
 // ---------------------------------------------------------------------------
 
@@ -126,7 +134,7 @@ function renderSplitRegion(ctx, motifs) {
 }
 
 // ---------------------------------------------------------------------------
-// Mode 3: Layering (BONUS)
+// Mode 3: Layering
 // Motif ditumpuk dari bawah ke atas dengan globalAlpha untuk transparansi.
 // ---------------------------------------------------------------------------
 
@@ -143,7 +151,6 @@ function renderLayering(ctx, motifs) {
     }
 
     ctx.save();
-    // Layer teratas lebih opaque
     ctx.globalAlpha = opacityStep * (i + 1);
     drawFn(ctx, motifCfg);
     ctx.restore();

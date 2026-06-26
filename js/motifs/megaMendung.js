@@ -1,4 +1,4 @@
-export function drawMegaMendung(ctx, config) {
+function drawMegaMendung(ctx, config) {
 	const size = config.size !== undefined ? config.size : 80;
 	const spacing = config.spacing !== undefined ? config.spacing : 40;
 	const primaryColor = config.primaryColor || "#003366";

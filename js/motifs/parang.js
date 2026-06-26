@@ -3,13 +3,15 @@ function drawParang(ctx, config = {}) {
     const {
         size = 40,
         spacing = 0,
-    
-        colors = {
-            primary: "#663399",
-            secondary: "#F28C28"
-        }
-    
+        primaryColor,
+        secondaryColor,
+        colors: _colors
     } = config;
+
+    const colors = {
+        primary: primaryColor || (_colors && _colors.primary) || "#663399",
+        secondary: secondaryColor || (_colors && _colors.secondary) || "#F28C28"
+    };
 
     const cell = size;
 

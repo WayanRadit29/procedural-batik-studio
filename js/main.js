@@ -31,6 +31,13 @@ function buildConfig() {
   };
 }
 
+// Debounce agar render tidak dipanggil setiap pixel slider bergerak (anti-lag)
+let _debounceTimer = null;
+function debouncedUpdate() {
+  clearTimeout(_debounceTimer);
+  _debounceTimer = setTimeout(update, 80);
+}
+
 /**
  * Entry point utama — dipanggil setiap kali ada perubahan di UI.
  */
@@ -50,6 +57,6 @@ function update() {
 
 // Inisialisasi saat DOM siap
 document.addEventListener("DOMContentLoaded", () => {
-  setupUI(update);   // ui.js mendaftarkan semua event listener, lalu panggil update()
-  update();          // render awal
+  setupUI(debouncedUpdate);  // pakai debounce untuk slider
+  update();                  // render awal langsung (tanpa debounce)
 });

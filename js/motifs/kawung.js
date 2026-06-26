@@ -31,9 +31,9 @@ function drawKawung(ctx, config) {
   // --- Resolusi parameter (semua punya nilai default) ---
   const size = config.size !== undefined ? config.size : 130;
   const spacing = config.spacing !== undefined ? config.spacing : size;
-  const color = config.color !== undefined ? config.color : "#D4A373";
+  const color = config.primaryColor !== undefined ? config.primaryColor : (config.color !== undefined ? config.color : "#D4A373");
   const lineWidth = config.lineWidth !== undefined ? config.lineWidth : 2.5;
-  const accentColor = config.accentColor !== undefined ? config.accentColor : color;
+  const accentColor = config.secondaryColor !== undefined ? config.secondaryColor : (config.accentColor !== undefined ? config.accentColor : color);
   const jitterAmount = config.jitter !== undefined ? config.jitter : 0.6;
 
   const width = ctx.canvas.width;
